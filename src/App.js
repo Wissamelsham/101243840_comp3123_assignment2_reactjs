@@ -9,6 +9,8 @@ import Footer from './components/footer/footer';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UpdateEmployee from './pages/updateEmployee';
+import Signup from './pages/signup';
+import Login from './pages/login';
 
 
 function App() {
@@ -25,6 +27,8 @@ function App() {
                  
                     <Switch> 
                     <Route exact path = "/" component={EmployeeList}></Route>
+                          <Route exact path = "/signup" component={Signup}></Route>
+                          <Route exact path = "/login" component={Login}></Route>
                           <Route exact path = "/employees" component={EmployeeList}></Route>
                           <Route path = "/addEmployee" component={AddEmployee}></Route>
                           <Route path = "/viewEmployee/:id" component={ViewEmployees}></Route>

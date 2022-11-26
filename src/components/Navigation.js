@@ -16,6 +16,7 @@ const  NavigationBar =()=> {
                         <Nav.Link href='/'id="navItem">Home</Nav.Link>
                         <Nav.Link href='/addEmployee' id="navItem">Add Employee</Nav.Link>
                         <Nav.Link href='/employees' id="navItem">Employee List</Nav.Link>
+                        <Nav.Link href='/login' id="navItem">Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

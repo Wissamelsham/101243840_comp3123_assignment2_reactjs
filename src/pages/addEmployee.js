@@ -89,7 +89,7 @@ const AddEmployee=()=>{
                                     
                                     
                                     <button style={{margin:"10px"}} className="btn btn-success" onClick={handleSubmit}><FaSave/> Save</button>
-                                    <button style={{margin:"10px"}} className="btn btn-danger" onClick={()=>{cancel()}} style={{marginLeft: "10px"}}><FaWindowClose/> Cancel</button>
+                                    <button style={{margin:"10px",marginLeft: "10px"}} className="btn btn-danger" onClick={()=>{cancel()}}><FaWindowClose/> Cancel</button>
                                     
                                      
                                     </form>

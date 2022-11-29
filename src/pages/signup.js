@@ -1,51 +1,48 @@
 import React, {useState} from 'react';
-import EmployeeService from '../employeeServices'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { FaSave,FaUser, FaWindowClose } from 'react-icons/fa';
+import userServices from '../userServices';
 
 
 const initialState ={
-            firstName: '',
-            lastName: '',
-            emailId: ''
+            username: '',
+            email: '',
+            password: ''
     
 };
 const Signup=()=>{
     const [state, setState]=useState(initialState);
-    const{firstName,lastName,emailId}= state;
+    const{username,email,password}= state;
 
 
     
     const history=useHistory();
-    const addEmployee = async(data)=>{
-        
-        const res=await EmployeeService.createEmployee(data);
+     const userSignup = async(data)=>{
+         const res=await userServices.userSignup(data);
        
-        console.log(res.data);
-        if(res.data==='Employee added!'){
+        if(res.data._id){
            
-       console.log(data);
-        toast.success("Successfully add employee details");
-        setTimeout(()=> history.push("/employees"),500);
+        toast.success("User Created Succesfully");
+        setTimeout(()=> history.push("/login"),500);
         }
         else {
            
             console.log(res.data);
-            toast.error("Please provide valid Email");
+            toast.error("Please provide valid Details");
         }
-    };
+     };
 
     
     
     
     const handleSubmit =(e) =>{
         e.preventDefault();
-        if(!firstName || !emailId || !lastName){
+        if(!username || !email || !password){
             toast.error("Please fill all values")
         }
         else{
-                addEmployee(state);
+            userSignup(state);
             
             //window.location.href="http://localhost:3000/employees";
         }
@@ -73,22 +70,22 @@ const Signup=()=>{
                             <div className = "card-body">
                                 <form onSubmit={handleSubmit} >
                                 
-                                        <label htmlFor="firstName"> Username: </label>
+                                        <label htmlFor="username"> Username: </label>
                                         <input type="text" placeholder="Username" name="username" className="form-control" 
-                                           value={firstName} onChange={handleInputChange} required/>
+                                           value={username} onChange={handleInputChange} required/>
   
                                     
-                                        <label htmlFor="lastName"> Email: </label>
+                                        <label htmlFor="email"> Email: </label>
                                         <input type="text" placeholder="Email" name="email" className="form-control" 
-                                             value={lastName} onChange={handleInputChange} required/>
+                                             value={email} onChange={handleInputChange} required/>
                                   
                                     
                                         <label htmlFor="emailId"> Password: </label>
                                         <input type="password" placeholder="Password" name="password" className="form-control" 
-                                             value={emailId} onChange={handleInputChange} required/>
+                                             value={password} onChange={handleInputChange} required/>
                                     
-                                    <div class="container">  
-                                        <div class="col-md-12 text-center"> 
+                                    <div className="container">  
+                                        <div className="col-md-12 text-center"> 
                                         <button style={{margin:"10px",alignContent:'center'}} className="btn btn-primary justify-content-center" onClick={handleSubmit}><FaUser/> Signup</button>
                                         <div>Do you have an account?<span  onClick={login} style={{cursor:'pointer',color:'#3333ff',fontWeight:'500'}}> Login </span></div>
                                         </div>

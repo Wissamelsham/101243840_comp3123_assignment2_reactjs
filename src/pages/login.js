@@ -3,49 +3,44 @@ import EmployeeService from '../employeeServices'
 import { useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { FaSave,FaUser, FaWindowClose } from 'react-icons/fa';
-
+import userServices from '../userServices';
 
 const initialState ={
-            firstName: '',
-            lastName: '',
-            emailId: ''
-    
+            username: '',
+            password: ''
 };
+
 const Login=()=>{
     const [state, setState]=useState(initialState);
-    const{firstName,lastName,emailId}= state;
+    const{username,password}= state;
 
 
     
     const history=useHistory();
-    const addEmployee = async(data)=>{
-        
-        const res=await EmployeeService.createEmployee(data);
-       
-        console.log(res.data);
-        if(res.data==='Employee added!'){
-           
-       console.log(data);
-        toast.success("Successfully add employee details");
-        setTimeout(()=> history.push("/employees"),500);
+     const userLogin = async(data)=>{
+        const res=await userServices.userLogin(data)
+        if(res.data.status=='true'){
+        toast.success(res.data.message)
+        console.log(res.data.jwt_token)
+        setTimeout(()=> history.push("/"),500)
         }
         else {
-           
             console.log(res.data);
-            toast.error("Please provide valid Email");
+            toast.error(res.data.message);
         }
-    };
+     };
+
 
     
     
     
     const handleSubmit =(e) =>{
         e.preventDefault();
-        if(!firstName || !emailId || !lastName){
+        if(!username || !password ){
             toast.error("Please fill all values")
         }
         else{
-                addEmployee(state);
+            userLogin(state);
             
             //window.location.href="http://localhost:3000/employees";
         }
@@ -73,18 +68,18 @@ const Login=()=>{
                             <div className = "card-body">
                                 <form onSubmit={handleSubmit} >
                                 
-                                        <label htmlFor="firstName"> Username: </label>
+                                        <label htmlFor="username"> Username: </label>
                                         <input type="text" placeholder="Username" name="username" className="form-control" 
-                                           value={firstName} onChange={handleInputChange} required/>
+                                           value={username} onChange={handleInputChange} required/>
   
                                   
                                     
-                                        <label htmlFor="emailId"> Password: </label>
+                                        <label htmlFor="password"> Password: </label>
                                         <input type="password" placeholder="Password" name="password" className="form-control" 
-                                             value={emailId} onChange={handleInputChange} required/>
+                                             value={password} onChange={handleInputChange} required/>
                                     
-                                    <div class="container">  
-                                        <div class="col-md-12 text-center"> 
+                                    <div className="container">  
+                                        <div className="col-md-12 text-center"> 
                                         <button style={{margin:"10px",alignContent:'center'}} className="btn btn-primary justify-content-center" onClick={handleSubmit}><FaUser/> Login</button>
                                         <div>Don't have an account?<span  onClick={signup}style={{cursor:'pointer',color:'#3333ff',fontWeight:'500'}}> Signup </span></div>
                                         </div>

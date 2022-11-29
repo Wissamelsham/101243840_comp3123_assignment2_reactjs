@@ -13,9 +13,8 @@ const  NavigationBar =()=> {
                 <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
                 <Navbar.Collapse id='responsive-navbar-nav'>
                     <Nav className="navbar-nav mx-auto">
-                        <Nav.Link href='/'id="navItem">Home</Nav.Link>
+                        <Nav.Link href='/' id="navItem">Employee List</Nav.Link>
                         <Nav.Link href='/addEmployee' id="navItem">Add Employee</Nav.Link>
-                        <Nav.Link href='/employees' id="navItem">Employee List</Nav.Link>
                         <Nav.Link href='/login' id="navItem">Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>

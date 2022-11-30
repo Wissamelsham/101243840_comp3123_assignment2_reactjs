@@ -25,6 +25,17 @@ const EmployeeList = () =>{
             
         
     };
+
+    const viewEmployee = async(id)=>{
+        console.log(id)
+        history.push(`/viewEmployee/${id}`)
+    };
+
+    const updateEmployee = async(id)=>{
+        console.log(id)
+        history.push(`/updateEmployee/${id}`)
+    };
+
     const onDeleteEmployee = async(id)=>{
         if(window.confirm("Are you sure that you wanted to delete that use record?")){
             const res= await EmployeeService.deleteEmployee(id);
@@ -34,10 +45,6 @@ const EmployeeList = () =>{
             }
             
         }
-                   
-                        
-            
-        
     };
     const addEmployee=()=>{
         history.push("/addEmployee");
@@ -65,23 +72,22 @@ const EmployeeList = () =>{
                             { data && data.map((item,index)=>{
                                 return(
                                     <tr key = {index}>
-                                         <td> {item.firstName} </td>   
-                                         <td> {item.lastName}</td>
-                                         <td> {item.emailId}</td>
+                                         <td> {item.first_name} </td>   
+                                         <td> {item.last_name}</td>
+                                         <td> {item.email}</td>
                                          <td>
                                             <div className="row">
                                                 <div className="col-md-4 col-sm-12">
-                                            <Link to ={`/updateEmployee/${item._id}`}>
-                                            <button style={{width:"100px",margin:"5px"}} className="btn btn-info"><FaEdit/>Update </button>
-                                                </Link>
+                                        
+                                            <button style={{width:"100px",margin:"5px"}} onClick={ () => updateEmployee(item._id)} className="btn btn-info"><FaEdit/>Update </button>
                                                 </div>
                                               <div className="col-md-4 col-sm-12">  
                                              <button style={{width:"100px",margin:"5px"}} onClick={ () => onDeleteEmployee(item._id)} className="btn btn-danger"><FaTrash/>Delete </button>
                                              </div>
                                              <div className="col-md-4 col-sm-12">
-                                             <Link to ={`/viewEmployee/${item._id}`}>
-                                             <button style={{width:"100px",margin:"5px"}} className="btn btn-success"><FaAddressBook/>View </button>
-                                         </Link>
+                                            
+                                             <button style={{width:"100px",margin:"5px"}} onClick={ () => viewEmployee(item._id)} className="btn btn-success"><FaAddressBook/>View </button>
+                                   
                                          </div>
 
                                             </div>

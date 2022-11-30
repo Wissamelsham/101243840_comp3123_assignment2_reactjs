@@ -1,10 +1,21 @@
 import React from 'react';
 import { Navbar, Nav, Container } from 'react-bootstrap';
 import './Navigation.css';
-
+import { Link, useNavigate,useHistory } from 'react-router-dom'
 const  NavigationBar =()=> {
-    
- 
+
+    const history=useHistory();
+    const logout=()=>{
+        localStorage.clear()
+        history.push('/login')
+    }
+    const showlist=()=>{
+        history.push('/')
+    }
+    const addemp=()=>{
+        history.push('/addEmployee')
+    }
+    let JWTToken = localStorage.getItem('jwt_token')
         return (
         
                <Navbar collapseOnSelect fixed='top' expand='lg' bg='black' varient='black' className='navbar-dark'>
@@ -12,10 +23,10 @@ const  NavigationBar =()=> {
             <Navbar.Brand>Employee Management</Navbar.Brand>
                 <Navbar.Toggle aria-controls='responsive-navbar-nav'/>
                 <Navbar.Collapse id='responsive-navbar-nav'>
-                    <Nav className="navbar-nav mx-auto">
-                        <Nav.Link href='/' id="navItem">Employee List</Nav.Link>
-                        <Nav.Link href='/addEmployee' id="navItem">Add Employee</Nav.Link>
-                        <Nav.Link href='/login' id="navItem">Logout</Nav.Link>
+                    <Nav className="navbar-nav mx-auto" >
+                        <Nav.Link  id="navItem" onClick={showlist}>Employee List</Nav.Link>
+                        <Nav.Link  id="navItem" onClick={addemp}>Add Employee</Nav.Link>
+                        <Nav.Link id="navItem"  onClick={logout} >Logout</Nav.Link>
                     </Nav>
                 </Navbar.Collapse>
             </Container>

@@ -6,28 +6,28 @@ import { FaSave, FaWindowClose } from 'react-icons/fa';
 
 
 const initialState ={
-            firstName: '',
-            lastName: '',
-            emailId: ''
+            first_name: '',
+            last_name: '',
+            email: ''
     
 };
 const AddEmployee=()=>{
     const [state, setState]=useState(initialState);
-    const{firstName,lastName,emailId}= state;
+    const{first_name,last_name,email}= state;
 
 
     
     const history=useHistory();
     const addEmployee = async(data)=>{
-        
+        console.log(data)
         const res=await EmployeeService.createEmployee(data);
        
-        console.log(res.data);
-        if(res.data==='Employee added!'){
+        console.log(res.data._id);
+        if(res.data._id){
            
        console.log(data);
         toast.success("Successfully add employee details");
-        setTimeout(()=> history.push("/employees"),500);
+        setTimeout(()=> history.push("/"),500);
         }
         else {
            
@@ -41,7 +41,7 @@ const AddEmployee=()=>{
     
     const handleSubmit =(e) =>{
         e.preventDefault();
-        if(!firstName || !emailId || !lastName){
+        if(!first_name || !email || !last_name){
             toast.error("Please fill all values")
         }
         else{
@@ -53,7 +53,7 @@ const AddEmployee=()=>{
     };
  
     const cancel=()=>{
-        history.push('/employees');
+        history.push('/');
     }
     
     
@@ -73,19 +73,19 @@ const AddEmployee=()=>{
                             <div className = "card-body">
                                 <form onSubmit={handleSubmit}>
                                 
-                                        <label htmlFor="firstName"> First Name: </label>
-                                        <input type="text" placeholder="First Name" name="firstName" className="form-control" 
-                                           value={firstName} onChange={handleInputChange} required/>
+                                        <label htmlFor="first_name"> First Name: </label>
+                                        <input type="text" placeholder="First Name" name="first_name" className="form-control" 
+                                           value={first_name} onChange={handleInputChange} required/>
   
                                     
-                                        <label htmlFor="lastName"> Last Name: </label>
-                                        <input type="text" placeholder="Last Name" name="lastName" className="form-control" 
-                                             value={lastName} onChange={handleInputChange} required/>
+                                        <label htmlFor="last_name"> Last Name: </label>
+                                        <input type="text" placeholder="Last Name" name="last_name" className="form-control" 
+                                             value={last_name} onChange={handleInputChange} required/>
                                   
                                     
-                                        <label htmlFor="emailId"> Email Id: </label>
-                                        <input type="email" placeholder="Email Address" name="emailId" className="form-control" 
-                                             value={emailId} onChange={handleInputChange} required/>
+                                        <label htmlFor="email"> Email Id: </label>
+                                        <input type="email" placeholder="Email Address" name="email" className="form-control" 
+                                             value={email} onChange={handleInputChange} required/>
                                     
                                     
                                     <button style={{margin:"10px"}} className="btn btn-success" onClick={handleSubmit}><FaSave/> Save</button>

@@ -21,6 +21,7 @@ const Login=()=>{
         const res=await userServices.userLogin(data)
         if(res.data.status=='true'){
         toast.success(res.data.message)
+        localStorage.setItem('jwt_token',res.data.jwt_token);
         console.log(res.data.jwt_token)
         setTimeout(()=> history.push("/"),500)
         }

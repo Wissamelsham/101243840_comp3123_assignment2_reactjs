@@ -21,24 +21,24 @@ class UpdateEmployee extends Component {
     componentDidMount(){
         EmployeeService.getEmployeeById(this.state.id).then( (res) =>{
             let employee = res.data;
-            this.setState({firstName: employee.firstName,
-                lastName: employee.lastName,
-                emailId : employee.emailId
+            this.setState({firstName: employee.first_name,
+                lastName: employee.last_name,
+                emailId : employee.email
             });
         });
     }
 
     updateEmployee = (e) => {
         e.preventDefault();
-        let employee = {firstName: this.state.firstName, lastName: this.state.lastName, emailId: this.state.emailId};
+        let employee = {first_name: this.state.firstName, last_name: this.state.lastName, email: this.state.emailId};
         console.log('employee => ' + JSON.stringify(employee));
         console.log('id => ' + JSON.stringify(this.state.id));
         EmployeeService.updateEmployee(employee, this.state.id).then( res => {
-            if(res.data==='Employee updated!'){
            
+            if(res.data.message==='Updated Succesfully'){
                 console.log(employee);
                 toast.success("Record successfully Updated");
-                this.props.history.push('/employees');
+                this.props.history.push('/');
                  }
                  else {
                     
@@ -62,7 +62,7 @@ class UpdateEmployee extends Component {
     }
 
     cancel(){
-        this.props.history.push('/employees');
+        this.props.history.push('/');
     }
 
     render() {
@@ -93,7 +93,7 @@ class UpdateEmployee extends Component {
                                         </div>
 
                                         <button style={{margin:"10px"}} className="btn btn-success" onClick={this.updateEmployee}><FaSave/> Save</button>
-                                        <button style={{margin:"10px"}} className="btn btn-danger" onClick={this.cancel.bind(this)} style={{marginLeft: "10px"}}><FaWindowClose/> Cancel</button>
+                                        <button style={{margin:"10px",marginLeft: "10px"}} className="btn btn-danger" onClick={this.cancel.bind(this)}><FaWindowClose/> Cancel</button>
                                     </form>
                                 </div>
                             </div>

@@ -23,7 +23,7 @@ class ViewEmployees extends Component {
     }
 
     cancel(){
-        this.props.history.push('/employees');
+        this.props.history.push('/');
     }
     render() {
         return (
@@ -32,19 +32,19 @@ class ViewEmployees extends Component {
                     <h3 className = "text-center"> View Employee Details</h3>
                     <div className = "card-body" >
                     <div className = "row">
-                            <label> ID: { this.state.employee._id }</label>
+                            {/* <label> ID: { this.state.employee._id }</label> */}
                             
                         </div>
                         <div className = "row">
-                            <label> First Name: { this.state.employee.firstName }</label>
+                            <label>Employee First Name: { this.state.employee.first_name }</label>
                             
                         </div>
                         <div className = "row">
-                            <label> Last Name: { this.state.employee.lastName }</label>
+                            <label>Employee Last Name: { this.state.employee.last_name }</label>
                             
                         </div>
                         <div className = "row">
-                            <label> Email ID: { this.state.employee.emailId }</label>
+                            <label>Employee Email ID: { this.state.employee.email}</label>
                             
                         </div>
                         <div  style={{float:"right"}}>

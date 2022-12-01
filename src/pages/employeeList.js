@@ -14,12 +14,14 @@ const EmployeeList = () =>{
     const history=useHistory();
 
     useEffect(()=>{
-        getEmployees();
+        getEmployees()
+        
     },[])
     const getEmployees = async()=>{
         const res= await EmployeeService.getEmployees();
         if(res.status===200){
             setData(res.data);
+           
         }
                         
             

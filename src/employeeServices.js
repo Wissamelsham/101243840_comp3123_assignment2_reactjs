@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const EMPLOYEE_API_BASE_URL = "http://localhost:3000/api/emp/employees"; 
-
+const EMPLOYEE_API_HEROKU_URL = "https://employee-management-app-001.herokuapp.com/api/emp/employees";
 class EmployeeService {
 
     getEmployees(){
@@ -11,7 +11,7 @@ class EmployeeService {
 
     createEmployee(employee){
         let JWTToken = localStorage.getItem('jwt_token')
-        return axios.post(EMPLOYEE_API_BASE_URL, employee,  { headers: {"Authorization" : `Bearer ${JWTToken}`} });
+        return axios.post(EMPLOYEE_API_HEROKU_URL, employee,  { headers: {"Authorization" : `Bearer ${JWTToken}`} });
     }
 
     getEmployeeById(employeeId){
